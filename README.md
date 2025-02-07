@@ -17,6 +17,21 @@ The **world points** are transformed to **camera coordinates** using the extrins
 
 <img src="assets/extrinsic_params.png" alt="Calibration extrinsic params" width="850" height="auto">
 
+$$
+R \begin{pmatrix}
+X \\
+Y \\
+Z
+\end{pmatrix} + t
+= [R | t] \begin{pmatrix}
+X \\
+Y \\
+Z \\
+1
+\end{pmatrix}
+$$
+
+
 ### b. Intrinsic parameters
 The **camera coordinates** are projected into the image plane using the intrinsics parameters.
 The intrinsic parameters include the *focal length*, the *optical center (principle point)* and *skew coefficient*
@@ -58,6 +73,7 @@ $$
 Where
 
 - ($c_x$, $c_y$) is principle point. It maps the intersection of Optical axis with the image plane from an idealized projection. It defines the (0, 0) of the image plane.
+However, in practice, we usually treat the top-left corner of the image sensor as the origin (for easier indexing). In this case, ($c_x$, $c_y$) describes the coordinates of the principal point, which is typically located at the center of the image.
 
     <img src="assets/principle_point.jpg" alt="Principle point calibration" width="500" height="auto">
 
@@ -82,8 +98,8 @@ Where
 ## 2. Experiment
 $$
 \begin{pmatrix}
-x \\
-y \\
+u \\
+v \\
 1
 \end{pmatrix}
 = P\begin{pmatrix}
@@ -92,7 +108,7 @@ Y \\
 Z \\
 1
 \end{pmatrix}
-= K R t \begin{pmatrix}
+= K [R|t] \begin{pmatrix}
 X \\
 Y \\
 Z \\
